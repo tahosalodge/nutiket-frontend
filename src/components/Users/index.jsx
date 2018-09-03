@@ -11,10 +11,10 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import { listUsers, deleteUser } from 'state/modules/user';
 
+import { listUsers, deleteUser } from 'state/modules/user';
+import { selectUsers } from 'selectors/user';
 import Actions from './Actions';
-import { selectUsers } from '../../selectors/user';
 
 const styles = theme => ({
   root: {
@@ -27,29 +27,6 @@ const styles = theme => ({
   },
 });
 
-const rows = [
-  {
-    id: 1,
-    name: 'Kevin McKernan',
-    email: 'kevin@mckernan.in',
-    role: 'Administrator',
-    lodge: 'Tahosa',
-  },
-  {
-    id: 2,
-    name: 'Mike McKernan',
-    email: 'mckernan.mike@gmail.com',
-    role: 'Owner - Tahosa Lodge',
-    lodge: 'Tahosa',
-  },
-  {
-    id: 3,
-    name: 'Bob Crume',
-    email: 'bob.crume@gmail.com',
-    role: 'Analytics - Tahosa Lodge',
-    lodge: 'Tahosa',
-  },
-];
 class Users extends Component {
   static propTypes = {
     // eslint-disable-next-line

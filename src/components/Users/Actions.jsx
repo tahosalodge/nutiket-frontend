@@ -23,7 +23,7 @@ const UserActions = ({
     <DialogTitle id="simple-dialog-title">Account Actions</DialogTitle>
     <div>
       <List>
-        <ListItem component={}>
+        <ListItem button>
           <ListItemText primary="Edit User" />
         </ListItem>
         <ListItem button>
