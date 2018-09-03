@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import {
   Card,
   CardContent,
@@ -15,18 +16,19 @@ const styles = {
     textTransform: 'none',
   },
   icon: {
-    fontSize: '10em',
+    fontSize: '7em',
     margin: 'auto',
     display: 'block',
+    minWidth: '200px',
   },
 };
 
-const Application = ({ classes }) => (
+const Application = ({ classes, label, icon }) => (
   <Button className={classes.button}>
     <Card>
       <CardContent>
-        <SvgIcon className={classes.icon}>
-          <PollIcon />
+        <SvgIcon className={classes.icon} color="secondary">
+          {icon()}
         </SvgIcon>
         <Typography
           gutterBottom
@@ -34,7 +36,7 @@ const Application = ({ classes }) => (
           component="h2"
           align="center"
         >
-          Application Name
+          {label}
         </Typography>
       </CardContent>
     </Card>
@@ -43,6 +45,13 @@ const Application = ({ classes }) => (
 
 Application.propTypes = {
   classes: classShape.isRequired,
+  label: PropTypes.string,
+  icon: PropTypes.func,
 };
+
+Application.defaultProps = {
+  label: 'Application',
+  icon: () => <PollIcon />
+}
 
 export default withStyles(styles)(Application);

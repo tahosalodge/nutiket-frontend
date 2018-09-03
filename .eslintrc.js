@@ -2,9 +2,11 @@
     parser: "babel-eslint",
     extends: ["airbnb", "plugin:prettier/recommended"],
     env: {
-        browser: true,
+      browser: true,
     },
-    rules: {},
+    rules: {
+      'react/destructuring-assignment': 0,
+    },
     settings: {
       'import/resolver': {
         node: {

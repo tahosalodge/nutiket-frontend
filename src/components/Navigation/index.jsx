@@ -10,9 +10,10 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import PeopleIcon from '@material-ui/icons/People';
+import AppsIcon from '@material-ui/icons/Apps';
+import UserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
+import FingerprintIcon from '@material-ui/icons/Fingerprint';
+import GroupIcon from '@material-ui/icons/Group';
 
 const Navigation = ({ classes, open, handleClose }) => (
   <Drawer
@@ -31,25 +32,25 @@ const Navigation = ({ classes, open, handleClose }) => (
     <List>
       <ListItem button component={Link} to="/dashboard">
         <ListItemIcon>
-          <DashboardIcon />
+          <AppsIcon />
         </ListItemIcon>
         <ListItemText primary="Dashboard" />
       </ListItem>
       <ListItem button component={Link} to="/profile">
         <ListItemIcon>
-          <DashboardIcon />
+          <FingerprintIcon />
         </ListItemIcon>
-        <ListItemText primary="Dashboard" />
+        <ListItemText primary="Profile" />
       </ListItem>
-      <ListItem button>
+      <ListItem button component={Link} to="/users">
         <ListItemIcon>
-          <ShoppingCartIcon />
+          <GroupIcon />
         </ListItemIcon>
         <ListItemText primary="Users" />
       </ListItem>
-      <ListItem button>
+      <ListItem button component={Link} to="/lodges">
         <ListItemIcon>
-          <PeopleIcon />
+          <UserCircleIcon />
         </ListItemIcon>
         <ListItemText primary="Lodges" />
       </ListItem>

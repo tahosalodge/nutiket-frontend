@@ -8,36 +8,20 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
 import TextField from 'components/Form/TextField';
-import { register } from 'state/modules/auth';
+import { login } from 'state/modules/auth';
 
-const Register = ({ fullScreen, ...props }) => (
-  <Dialog fullScreen={fullScreen} open aria-labelledby="register">
-    <Formik onSubmit={values => props.register(values)}>
+const Login = ({ fullScreen, ...props }) => (
+  <Dialog fullScreen={fullScreen} open aria-labelledby="login">
+    <Formik onSubmit={values => props.login(values)}>
       {({ handleSubmit }) => (
         <Form>
-          <DialogTitle id="register">Create an account</DialogTitle>
+          <DialogTitle id="login">Log In</DialogTitle>
           <DialogContent>
-            <DialogContentText>Helper text goes here.</DialogContentText>
             <TextField
               autoFocus
-              margin="dense"
-              name="fname"
-              label="First Name"
-              type="text"
-              fullWidth
-            />
-            <TextField
-              margin="dense"
-              name="lname"
-              label="Last Name"
-              type="text"
-              fullWidth
-            />
-            <TextField
               margin="dense"
               name="email"
               label="Email Address"
@@ -56,8 +40,8 @@ const Register = ({ fullScreen, ...props }) => (
             <Button component={Link} to="/" color="primary">
               Cancel
             </Button>
-            <Button onClick={handleSubmit} color="primary" autoFocus>
-              Register
+            <Button onClick={handleSubmit} color="primary">
+              Submit
             </Button>
           </DialogActions>
         </Form>
@@ -66,14 +50,15 @@ const Register = ({ fullScreen, ...props }) => (
   </Dialog>
 );
 
-Register.propTypes = {
+Login.propTypes = {
   fullScreen: PropTypes.bool.isRequired,
 };
 
+// export default withMobileDialog()(Login);
 export default compose(
   connect(
     null,
-    { register }
+    { login }
   ),
   withMobileDialog()
-)(Register);
+)(Login);

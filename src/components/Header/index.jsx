@@ -34,11 +34,11 @@ const Header = ({ classes, open, handleOpen }) => (
       >
         Dashboard
       </Typography>
-      <IconButton color="inherit">
+      {/* <IconButton color="inherit">
         <Badge badgeContent={4} color="secondary">
           <NotificationsIcon />
         </Badge>
-      </IconButton>
+      </IconButton> */}
     </Toolbar>
   </AppBar>
 );

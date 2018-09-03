@@ -8,6 +8,10 @@ import Navigation from 'components/Navigation';
 import withRoot from 'components/Root';
 import Welcome from 'components/Welcome';
 import Dashboard from 'components/Dashboard';
+import Register from 'components/Register';
+import Login from 'components/Login';
+import Users from 'components/Users';
+import Lodges from 'components/Lodges';
 import styles from './styles';
 
 class App extends React.Component {
@@ -45,6 +49,10 @@ class App extends React.Component {
               <Router>
                 <Welcome path="/" />
                 <Dashboard path="/dashboard" />
+                <Register path="/register" />
+                <Login path="/login" />
+                <Users path="/users" />
+                <Lodges path="/lodges" />
               </Router>
             </div>
           </main>

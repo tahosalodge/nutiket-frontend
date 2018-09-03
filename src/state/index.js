@@ -13,8 +13,8 @@ export default function() {
   sagaMiddleware.run(rootSaga);
 
   if (module.hot) {
-    module.hot.accept('./reducers', () => {
-      const nextRootReducer = require('./reducers').default; // eslint-disable-line
+    module.hot.accept('./reducer', () => {
+      const nextRootReducer = require('./reducer').default; // eslint-disable-line
       store.replaceReducer(nextRootReducer);
     });
   }
