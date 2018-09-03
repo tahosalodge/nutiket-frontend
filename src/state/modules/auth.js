@@ -113,7 +113,31 @@ function* loginSaga({ payload }) {
   }
 }
 
+function* checkToken() {
+  const { pathname } = window.location;
+  try {
+    if (pathname === '/logout') {
+      return;
+    }
+    if (!localStorage.getItem('token')) {
+      throw new Error('No token found.');
+    }
+    yield put(addToast('Welcome back! Logging you in now...'));
+    const response = yield call(apiRequest, '/v1/user/verify');
+    yield put(loginSuccess(response));
+  } catch (error) {
+    yield put(loginFailure(error.message));
+    if (error.code !== 'NETWORK') {
+      // localStorage.removeItem('token');
+    }
+    // if (pathname.indexOf('register') === -1 && pathname !== '/') {
+    //   yield put(push('/login'));
+    // }
+  }
+}
+
 export function* saga() {
+  yield checkToken();
   yield takeLatest(actions.register.request, registerSaga);
   yield takeLatest(actions.login.request, loginSaga);
 }

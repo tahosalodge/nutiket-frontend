@@ -9,7 +9,7 @@ import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 
-const Header = ({ classes, open, handleOpen }) => (
+const Header = ({ classes, open, handleOpen, auth }) => (
   <AppBar
     position="absolute"
     className={classNames(classes.appBar, open && classes.appBarShift)}
@@ -34,11 +34,13 @@ const Header = ({ classes, open, handleOpen }) => (
       >
         Dashboard
       </Typography>
-      {/* <IconButton color="inherit">
-        <Badge badgeContent={4} color="secondary">
-          <NotificationsIcon />
-        </Badge>
-      </IconButton> */}
+      {auth.loggedIn && (
+        <IconButton color="inherit">
+          <Badge badgeContent={4} color="secondary">
+            <NotificationsIcon />
+          </Badge>
+        </IconButton>
+      )}
     </Toolbar>
   </AppBar>
 );
@@ -47,6 +49,7 @@ Header.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   open: PropTypes.bool.isRequired,
   handleOpen: PropTypes.func.isRequired,
+  auth: PropTypes.shape({}).isRequired,
 };
 
 export default Header;
