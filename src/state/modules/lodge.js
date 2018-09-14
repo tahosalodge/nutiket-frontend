@@ -12,7 +12,7 @@ const initialState = {
 
 export const reducer = createReducer(actions, initialState);
 
-export const createLodges = payload => ({
+export const createLodge = payload => ({
   type: actions.create.request,
   payload,
 });
@@ -107,8 +107,8 @@ const deleteFailure = error => ({
 
 function* create({ payload }) {
   try {
-    const { lodges } = yield call(apiRequest, '/v1/lodge', 'PUT', payload);
-    yield put(createSuccess(lodges));
+    const { lodge } = yield call(apiRequest, '/v1/lodge', 'POST', payload);
+    yield put(createSuccess(lodge));
   } catch (error) {
     yield put(createFailure(error));
   }
@@ -116,8 +116,8 @@ function* create({ payload }) {
 
 function* get({ payload: { id } }) {
   try {
-    const { lodges } = yield call(apiRequest, `/v1/lodge/${id}`);
-    yield put(getSuccess(lodges));
+    const { lodge } = yield call(apiRequest, `/v1/lodge/${id}`);
+    yield put(getSuccess(lodge));
   } catch (error) {
     yield put(getFailure(error));
   }
@@ -125,13 +125,8 @@ function* get({ payload: { id } }) {
 
 function* update({ payload: { id, patch } }) {
   try {
-    const { lodges } = yield call(
-      apiRequest,
-      `/v1/lodge/${id}`,
-      'PATCH',
-      patch
-    );
-    yield put(updateSuccess(lodges));
+    const { lodge } = yield call(apiRequest, `/v1/lodge/${id}`, 'PATCH', patch);
+    yield put(updateSuccess(lodge));
   } catch (error) {
     yield put(updateFailure(error));
   }
@@ -139,8 +134,8 @@ function* update({ payload: { id, patch } }) {
 
 function* remove({ payload: { id } }) {
   try {
-    const { lodges } = yield call(apiRequest, `/v1/lodge/${id}`, 'DELETE');
-    yield put(deleteSuccess(lodges));
+    yield call(apiRequest, `/v1/lodge/${id}`, 'DELETE');
+    yield put(deleteSuccess(id));
   } catch (error) {
     yield put(deleteFailure(error));
   }

@@ -18,12 +18,18 @@ export const mergeState = (state, { items }) => {
 
 export const insertToState = (state, item) => ({
   ...state,
-  [item.id]: item,
+  items: {
+    ...state.items,
+    [item._id]: item,
+  },
 });
 
 export const removeFromState = (state, id) => {
-  if (state[id]) {
-    return omit(state, id);
+  if (state.items[id]) {
+    return {
+      ...state,
+      items: omit(state.items, id),
+    };
   }
   return state;
 };

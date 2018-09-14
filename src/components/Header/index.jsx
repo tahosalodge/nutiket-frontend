@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import AppBar from '@material-ui/core/AppBar';
@@ -35,11 +35,16 @@ const Header = ({ classes, open, handleOpen, auth }) => (
         Dashboard
       </Typography>
       {auth.loggedIn && (
-        <IconButton color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
+        <Fragment>
+          <Typography variant="subheading" color="inherit">
+            {`Welcome ${auth.user.fname}`}
+          </Typography>
+          <IconButton color="inherit">
+            <Badge badgeContent={4} color="secondary">
+              <NotificationsIcon />
+            </Badge>
+          </IconButton>
+        </Fragment>
       )}
     </Toolbar>
   </AppBar>

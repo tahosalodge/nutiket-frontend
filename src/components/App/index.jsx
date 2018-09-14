@@ -15,6 +15,7 @@ import Register from 'components/Register';
 import Login from 'components/Login';
 import Users from 'components/Users';
 import Lodges from 'components/Lodges';
+import Profile from 'components/Profile';
 import styles from './styles';
 
 class App extends React.Component {
@@ -58,6 +59,7 @@ class App extends React.Component {
                 <Login path="/login" />
                 <Users path="/users" />
                 <Lodges path="/lodges" />
+                <Profile path="/profile" user={auth.user} />
               </Router>
             </div>
           </main>

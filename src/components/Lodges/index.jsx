@@ -11,9 +11,13 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import AddIcon from '@material-ui/icons/Add';
 import Chip from '@material-ui/core/Chip';
-import { listLodges } from 'state/modules/lodge';
-import { selectLodges } from 'selectors/lodge';
+import Button from '@material-ui/core/Button';
+import { listLodges, deleteLodge } from 'state/modules/lodge';
+import { getLodges } from 'selectors/lodge';
+import { arrayOfLodges } from 'shapes/lodge';
+import CreateLodge from './Create';
 
 import Actions from './Actions';
 
@@ -29,30 +33,25 @@ const styles = theme => ({
   chip: {
     margin: theme.spacing.unit,
   },
+  fab: {
+    position: 'absolute',
+    bottom: theme.spacing.unit * 2,
+    right: theme.spacing.unit * 2,
+  },
 });
 
-const rows = [
-  {
-    id: 1,
-    name: 'Tahosa',
-    council: '061',
-    chapters: ['Spirit Eagle', 'White Buffalo', 'Kodiak'],
-  },
-  {
-    id: 2,
-    name: 'Ha-Kin-Skay-A-Ki',
-    council: '062',
-    chapters: [],
-  },
-];
 class Lodges extends Component {
   static propTypes = {
     // eslint-disable-next-line
     classes: PropTypes.object.isRequired,
+    listLodges: PropTypes.func.isRequired,
+    deleteLodge: PropTypes.func.isRequired,
+    lodges: arrayOfLodges.isRequired,
   };
 
   state = {
     actions: false,
+    showCreateModal: false,
   };
 
   componentDidMount() {
@@ -63,12 +62,19 @@ class Lodges extends Component {
 
   closeActions = () => this.setState({ actions: false });
 
+  toggleCreate = () =>
+    this.setState(prev => ({ showCreateModal: !prev.showCreateModal }));
+
   render() {
-    const { actions } = this.state;
-    const { classes } = this.props;
+    const { actions, showCreateModal } = this.state;
+    const { classes, lodges } = this.props;
     return (
       <Paper className={classes.root}>
-        <Actions userId={actions} onClose={this.closeActions} />
+        <Actions
+          lodgeId={actions}
+          onClose={this.closeActions}
+          deleteLodge={this.props.deleteLodge}
+        />
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
@@ -79,19 +85,23 @@ class Lodges extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map(row => (
-              <TableRow key={row.id}>
+            {lodges.map(row => (
+              <TableRow key={row._id}>
                 <TableCell component="th" scope="row">
                   {row.name}
                 </TableCell>
                 <TableCell>{row.council}</TableCell>
                 <TableCell>
                   {row.chapters.map(chapter => (
-                    <Chip className={classes.chip} label={chapter} />
+                    <Chip
+                      key={chapter._id}
+                      className={classes.chip}
+                      label={chapter.name}
+                    />
                   ))}
                 </TableCell>
                 <TableCell>
-                  <IconButton onClick={() => this.openActions(row.id)}>
+                  <IconButton onClick={() => this.openActions(row._id)}>
                     <MoreIcon />
                   </IconButton>
                 </TableCell>
@@ -99,19 +109,28 @@ class Lodges extends Component {
             ))}
           </TableBody>
         </Table>
+        <CreateLodge open={showCreateModal} handleClose={this.toggleCreate} />
+        <Button
+          variant="fab"
+          className={classes.fab}
+          color="secondary"
+          onClick={this.toggleCreate}
+        >
+          <AddIcon />
+        </Button>
       </Paper>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  lodges: selectLodges(state),
+  lodges: getLodges(state),
 });
 
 export default compose(
   connect(
     mapStateToProps,
-    { listLodges }
+    { listLodges, deleteLodge }
   ),
   withStyles(styles)
 )(Lodges);

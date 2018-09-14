@@ -1,1 +1,1 @@
-export const selectLodges = state => Object.values(state.lodge.items);
+export const getLodges = state => Object.values(state.lodge.items);

@@ -19,13 +19,14 @@ const SimpleDialog = ({
   classes,
   onClose,
   selectedValue,
-  userId,
+  lodgeId,
+  deleteLodge,
   ...other
 }) => (
   <Dialog
     onClose={onClose}
     aria-labelledby="simple-dialog-title"
-    open={!!userId || false}
+    open={!!lodgeId || false}
     {...other}
   >
     <DialogTitle id="simple-dialog-title">Lodge Actions</DialogTitle>
@@ -38,7 +39,10 @@ const SimpleDialog = ({
           <ListItemText primary="Edit Lodge" />
         </ListItem>
         <ListItem button>
-          <ListItemText primary="Delete Lodge" />
+          <ListItemText
+            primary="Delete Lodge"
+            onClick={() => deleteLodge(lodgeId)}
+          />
         </ListItem>
       </List>
     </div>
@@ -53,37 +57,3 @@ SimpleDialog.propTypes = {
 };
 
 export default withStyles(styles)(SimpleDialog);
-
-// class SimpleDialogDemo extends React.Component {
-//   state = {
-//     open: false,
-//     selectedValue: emails[1],
-//   };
-
-//   handleClickOpen = () => {
-//     this.setState({
-//       open: true,
-//     });
-//   };
-
-//   handleClose = value => {
-//     this.setState({ selectedValue: value, open: false });
-//   };
-
-//   render() {
-//     return (
-//       <div>
-//         <Typography variant="subheading">Selected: {this.state.selectedValue}</Typography>
-//         <br />
-//         <Button onClick={this.handleClickOpen}>Open simple dialog</Button>
-//         <SimpleDialogWrapped
-//           selectedValue={this.state.selectedValue}
-//           open={this.state.open}
-//           onClose={this.handleClose}
-//         />
-//       </div>
-//     );
-//   }
-// }
-
-// export default SimpleDialogDemo;
