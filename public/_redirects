@@ -1,0 +1,2 @@
+/api/* https://nutiket-api.wimachtendienk.com/api/:splat
+https://nutiket.netlify.com/* https://nutiket.wimachtendienk.com/:splat 301!
