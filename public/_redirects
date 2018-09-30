@@ -1,3 +1,2 @@
 /*  /index.html  200
-/api/* https://nutiket-api.wimachtendienk.com/api/:splat 200
 https://nutiket.netlify.com/* https://nutiket.wimachtendienk.com/:splat 301!

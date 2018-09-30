@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+const isDevelopment = process.env.NODE_ENV !== 'production';
+
 export default async function apiRequest(url, method = 'GET', body = null) {
   const token = localStorage.getItem('token');
   const params = {
@@ -7,6 +9,9 @@ export default async function apiRequest(url, method = 'GET', body = null) {
     url: `/api${url}`,
     headers: {},
   };
+  if (!isDevelopment) {
+    params.url = `${process.env.REACT_APP_API_URL}${params.url}`;
+  }
   if (body) {
     params.data = body;
   }
