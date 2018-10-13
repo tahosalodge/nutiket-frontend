@@ -1,7 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import compose from 'lodash/fp/compose';
 import { Formik, Form } from 'formik';
 import { Paper, Typography, withStyles, Button } from '@material-ui/core';
 import TextField from 'components/Form/TextField';
+import { updateUser } from 'state/modules/user';
 
 const styles = theme => ({
   root: {
@@ -14,10 +17,13 @@ const styles = theme => ({
   },
 });
 
-const Profile = ({ classes, user }) => (
+const Profile = ({ classes, user, ...props }) => (
   <Paper className={classes.root}>
     <Typography variant="display1">Profile</Typography>
-    <Formik onSubmit={values => console.log(values)} initialValues={user}>
+    <Formik
+      onSubmit={values => props.updateUser(user._id, values)}
+      initialValues={user}
+    >
       {({ handleSubmit }) => (
         <Form>
           <TextField
@@ -67,4 +73,10 @@ const Profile = ({ classes, user }) => (
   </Paper>
 );
 
-export default withStyles(styles)(Profile);
+export default compose(
+  connect(
+    null,
+    { updateUser }
+  ),
+  withStyles(styles)
+)(Profile);
