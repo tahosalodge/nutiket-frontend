@@ -67,9 +67,12 @@ const getFailure = error => ({
   },
 });
 
-export const updateUser = payload => ({
+export const updateUser = (id, patch) => ({
   type: actions.update.request,
-  payload,
+  payload: {
+    id,
+    patch,
+  },
 });
 
 const updateSuccess = user => ({

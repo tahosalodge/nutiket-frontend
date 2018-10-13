@@ -1,5 +1,4 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { navigate } from '@reach/router';
 import apiRequest from 'utils/apiRequest';
 import { addToast } from 'state/modules/toast';
 
@@ -108,7 +107,6 @@ function* loginSaga({ payload }) {
     const response = yield call(apiRequest, '/v1/user/login', 'POST', payload);
     localStorage.setItem('token', response.token);
     yield put(loginSuccess(response));
-    yield navigate('/');
   } catch (error) {
     yield put(loginFailure(error));
     yield put(addToast(error.message));
